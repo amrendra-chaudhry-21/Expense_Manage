@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: jinvani-ott-backend
+  namespace: default
+  labels:
+    app: jinvani-ott-backend
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: jinvani-ott-backend
+  template:
+    metadata:
+      labels:
+        app: jinvani-ott-backend
+    spec:
+      containers:
+        - name: jinvani-ott-backend
+          image: jinvani-ott-backend:latest
+          ports:
+            - containerPort: 8000
+          env:
+            - name: NODE_ENV
+              value: "production"
+            - name: PORT
+              value: "8000"
+          resources:
+            requests:
+              memory: "256Mi"
+              cpu: "250m"
+            limits:
+              memory: "512Mi"
+              cpu: "500m"
+          livenessProbe:
+            httpGet:
+              path: /api/v1/health
+              port: 8000
+            initialDelaySeconds: 30
+            periodSeconds: 10
+          readinessProbe:
+            httpGet:
+              path: /api/v1/health
+              port: 8000
+            initialDelaySeconds: 5
+            periodSeconds: 10

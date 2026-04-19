@@ -1,0 +1,110 @@
+@import "tailwindcss";
+
+@theme {
+  --color-darkBg: #0a0a0a;
+  --color-darkCard: rgba(20, 20, 20, 0.65);
+  --color-neonAmber: #f59e0b;
+  --color-neonBlue: #3b82f6;
+  --color-neonOrange: #ea580c;
+  
+  --shadow-neon-amber: 0 0 15px rgba(245, 158, 11, 0.5);
+  --shadow-neon-blue: 0 0 15px rgba(59, 130, 246, 0.5);
+  --shadow-glass: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  
+  --blur-xs: 2px;
+}
+
+body {
+  background-color: var(--color-darkBg);
+  color: #f3f4f6; /* gray-100 */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  min-height: 100vh;
+  overflow-x: hidden;
+  background-image: radial-gradient(circle at 75% 25%, rgba(45,30,10,0.8) 0%, rgba(10,10,10,1) 60%), radial-gradient(circle at top left, rgba(20,20,20,1) 0%, rgba(10,10,10,1) 100%);
+  color-scheme: dark;
+}
+
+.honeycomb-pattern::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url("data:image/svg+xml,%3Csvg width='60' height='100' viewBox='0 0 60 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cg stroke='%23f59e0b' stroke-width='1' stroke-opacity='0.08' fill='none' fill-rule='evenodd'%3E%3Cpath d='M30 100L0 85V55l30-15 30 15v30zM15 47.5L0 40V10l30-15 30 15v30l-15 7.5L30 40l-15 7.5zM30 65l15 7.5v-15L30 50l-15 7.5v15L30 65z'/%3E%3C/g%3E%3C/svg%3E");
+  background-size: 60px 100px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+@layer utilities {
+  .glassmorphism {
+    background-color: var(--color-darkCard);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: var(--shadow-glass);
+  }
+  .input-field {
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 0.75rem;
+    padding: 0.75rem 1rem;
+    color: #e5e7eb; /* gray-200 */
+    transition: all 0.3s;
+    outline: none;
+  }
+  .input-field:focus {
+    border-color: var(--color-neonAmber);
+    box-shadow: 0 0 0 1px var(--color-neonAmber);
+  }
+  
+  .btn-primary {
+    font-weight: 600;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.75rem;
+    transition: all 0.3s;
+    background-image: linear-gradient(to right, var(--color-neonOrange), var(--color-neonAmber));
+    color: white;
+    box-shadow: var(--shadow-neon-amber);
+  }
+  .btn-primary:hover {
+    transform: scale(1.05);
+  }
+  .btn-primary:active {
+    transform: scale(0.95);
+  }
+  
+  .btn-secondary {
+    font-weight: 600;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.75rem;
+    transition: all 0.3s;
+    background-color: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: white;
+  }
+  .btn-secondary:hover {
+    transform: scale(1.05);
+    border-color: #d1d5db; /* gray-300 */
+  }
+  .btn-secondary:active {
+    transform: scale(0.95);
+  }
+}
+
+/* Custom scrollbar for webkit */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #0a0a0a;
+}
+::-webkit-scrollbar-thumb {
+  background: #333;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}

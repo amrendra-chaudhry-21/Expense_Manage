@@ -1,0 +1,29 @@
+version: "3.8"
+
+services:
+  app:
+    build: .
+    container_name: jinvani-ott-backend
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    environment:
+      - NODE_ENV=staging
+      - PORT=8000
+      - MONGOOSE_URI=${MONGOOSE_URI}
+    volumes:
+      - ./logs:/usr/src/app/logs
+    depends_on:
+      - mongo
+
+  mongo:
+    image: mongo:6.0
+    container_name: jinvani-mongo
+    restart: unless-stopped
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+
+volumes:
+  mongo-data:
